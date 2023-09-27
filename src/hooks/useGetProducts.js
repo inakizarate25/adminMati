@@ -1,5 +1,5 @@
 import { db } from "../config/firebaseConfig";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy } from "firebase/firestore";
 import { useState, useEffect } from "react";
 
 export const useGetProducts = () => {

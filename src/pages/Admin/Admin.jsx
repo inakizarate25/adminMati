@@ -1,25 +1,27 @@
 import { useGetProducts } from "../../hooks/useGetProducts";
 import { useDeleteProduct } from "../../hooks/useDeleteProduct";
-import { useUpdateProd } from "../../hooks/useUpdateProd";
 import Header from "../../components/Header/Header";
-import AddProductForm from "../addProductForm/AddProductForm";
 import edit from "../../assets/pen.svg";
 import del from "../../assets/trash-alt (1).svg";
-import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 const Admin = () => {
   const { products, getProducts } = useGetProducts();
   const { deleteProduct } = useDeleteProduct();
-  const { updateProduct } = useUpdateProd();
 
   return (
-    <section className="h-full w-full bg-slate-200 flex items-center justify-center flex-col">
+    <section className="h-full w-full bg-slate-200 flex items-center justify-center flex-col px-10 gap-16">
       <Header />
-      <span>Agregar Producto</span>
-      <AddProductForm />
 
-      <table className="rounded-md">
-        <thead>
-          <tr className="bg-slate-700 text-white ">
+      <Link
+        to={"/add"}
+        className="flex items-center justify-center bg-blue-700 px-5 py-2 rounded-md text-white mt-5 self-end "
+      >
+        Agregar Producto
+      </Link>
+
+      <table className="rounded-xl w-full">
+        <thead className="rounded-xl">
+          <tr className="bg-slate-700 text-white rounded-xl">
             <th className="border border-slate-500 px-5 py-2">Id</th>
             <th className="border border-slate-500 px-5 py-2">Nombre</th>
             <th className="border border-slate-500 px-5 py-2">Precio</th>
@@ -51,11 +53,13 @@ const Admin = () => {
                 {product.descripcion}
               </td>
               <td className="border border-slate-600 px-5 py-1 ">
-                <img
-                  src={edit}
-                  alt="edit"
-                  className="h-8 w-8 bg-blue-500 rounded-sm p-1 cursor-pointer inline-block mr-1"
-                />
+                <Link to={`/edit/${product.id}`}>
+                  <img
+                    src={edit}
+                    alt="edit"
+                    className="h-8 w-8 bg-blue-500 rounded-sm p-1 cursor-pointer inline-block mr-1"
+                  />
+                </Link>
                 <img
                   src={del}
                   alt="delete"
