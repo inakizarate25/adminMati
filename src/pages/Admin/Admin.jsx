@@ -4,73 +4,139 @@ import Header from "../../components/Header/Header";
 import edit from "../../assets/pen.svg";
 import del from "../../assets/trash-alt (1).svg";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import "./styles.css";
 const Admin = () => {
   const { products, getProducts } = useGetProducts();
   const { deleteProduct } = useDeleteProduct();
 
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [productNameFilter, setProductNameFilter] = useState("");
+
+  const filterByCategory = (e) => {
+    const { value } = e.target;
+    setSelectedCategory(value);
+    setProductNameFilter("");
+  };
+  const filterByName = (event) => {
+    const { value } = event.target;
+    setProductNameFilter(value);
+  };
+  const filteredItems = products.filter((product) => {
+    return (
+      (!selectedCategory || product.categoria === selectedCategory) &&
+      (!productNameFilter ||
+        product.nombre
+          .toLowerCase()
+          .includes(productNameFilter.toLocaleLowerCase()))
+    );
+  });
+
   return (
-    <section className="h-full w-full bg-slate-200 flex items-center justify-center flex-col px-10 gap-16">
+    <section className=" bg-neutral-900 flex items-center justify-center flex-col  gap-10  w-full min-h-full overflow-hidden px-3 py-8">
       <Header />
 
-      <Link
-        to={"/add"}
-        className="flex items-center justify-center bg-blue-700 px-5 py-2 rounded-md text-white mt-5 self-end "
-      >
-        Agregar Producto
-      </Link>
+      {/* FILTROS Y AGREGAR PRODUCTO */}
+      <nav className="flex flex-col lg:flex-row items-end  justify-around  gap-5 ">
+        <div className="flex items-start gap-1 flex-col">
+          <label className="text-neutral-500" htmlFor="namesearch">
+            Filtrar por nombre
+          </label>
 
-      <table className="rounded-xl w-full">
-        <thead className="rounded-xl">
-          <tr className="bg-slate-700 text-white rounded-xl">
-            <th className="border border-slate-500 px-5 py-2">Id</th>
-            <th className="border border-slate-500 px-5 py-2">Nombre</th>
-            <th className="border border-slate-500 px-5 py-2">Precio</th>
-            <th className="border border-slate-500 px-5 py-2">Stock</th>
-            <th className="border border-slate-500 px-5 py-2">Categoria</th>
-            <th className="border border-slate-500 px-5 py-2">Descripcion</th>
-            <th className="border border-slate-500 px-5 py-2">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.map((product) => (
-            <tr key={product.id} className="bg-slate-200">
-              <td className="border border-slate-600 px-5 py-1">
-                {product.id}
-              </td>
-              <td className="border border-slate-600 px-5 py-1">
-                {product.nombre}
-              </td>
-              <td className="border border-slate-600 px-5 py-1">
-                ${product.precio}
-              </td>
-              <td className="border border-slate-600 px-5 py-1">
-                {product.stock} Unidades
-              </td>
-              <td className="border border-slate-600 px-5 py-1">
-                {product.categoria}
-              </td>
-              <td className="border border-slate-600 px-5 py-1 max-w-sm break-words">
-                {product.descripcion}
-              </td>
-              <td className="border border-slate-600 px-5 py-1 ">
-                <Link to={`/edit/${product.id}`}>
-                  <img
-                    src={edit}
-                    alt="edit"
-                    className="h-8 w-8 bg-blue-500 rounded-sm p-1 cursor-pointer inline-block mr-1"
-                  />
-                </Link>
+          <input
+            type="text"
+            id="namesearch"
+            placeholder="Buscar"
+            value={productNameFilter}
+            onChange={filterByName}
+            className="border border-slate-900 rounded-md px-3 py-2 w-[300px]"
+          />
+        </div>
+        <div className="flex items-start gap-1 flex-col">
+          <label htmlFor="selectaCategoria" className="text-neutral-500">
+            Filtrar por categoria
+          </label>
+
+          <select
+            name="cat"
+            id="selectaCategoria"
+            value={selectedCategory}
+            onChange={filterByCategory}
+            className="border border-slate-900 rounded-md px-3 py-2 w-[300px]"
+          >
+            <option value="">Todos</option>
+            <option value="categoria 1">Categoría 1</option>
+            <option value="categoria 2">Categoría 2</option>
+            <option value="categoria 3">Categoría 3</option>
+          </select>
+        </div>
+        <Link
+          to={"/add"}
+          className="flex items-centerjustify-center gap-3 bg-gray-800 text-slate-50 rounded-md px-3 py-2 "
+        >
+          Agregar Nuevo Producto
+        </Link>
+      </nav>
+
+      {/* TABLA DE PRODUCTOS */}
+      <article className="w-full max-w-screen-xl flex items-center justify-between flex-col border border-slate-900 rounded-xl mb-10  overflow-x-scroll mx-5 lg:overflow-x-hidden">
+        <header className="flex items-center justify-between  bg-slate-900 rounded-t-lg text-slate-50 lg:w-full">
+          <span className="text-slate-150 pl-2 text-xl w-32 py-2 ">Id</span>
+          <span className="text-slate-150 pl-2 text-xl w-32 py-2 ">Nombre</span>
+          <span className="text-slate-150 pl-2 text-xl w-32 py-2 ">Precio</span>
+          <span className="text-slate-150 pl-2 text-xl w-32 py-2 ">Stock</span>
+          <span className="text-slate-150 pl-2 text-xl w-32 py-2 ">
+            Categoria
+          </span>
+          <span className="text-slate-150 pl-2 text-xl w-32 py-2 ">
+            Descripcion
+          </span>
+          <span className="text-slate-150 pl-2 text-xl w-32 py-2 ">
+            Acciones
+          </span>
+        </header>
+
+        {filteredItems.map((product) => (
+          <div
+            key={product.id}
+            className="flex items-center justify-between   text-slate-50 border-b border-slate-600 bg-neutral-900 lg:w-full"
+          >
+            <span className="text-slate-200 w-32 py-2  pl-2 break-words">
+              {product.id}
+            </span>
+            <span className="text-slate-200 w-32 py-2  pl-2 break-words">
+              {product.nombre}
+            </span>
+            <span className="text-slate-200 w-32 py-2  pl-2 break-words">
+              ${product.precio}
+            </span>
+            <span className="text-slate-200 w-32 py-2  pl-2 break-words">
+              {product.stock} Unidades
+            </span>
+            <span className="text-slate-200 w-32 py-2  pl-2 break-words">
+              {product.categoria}
+            </span>
+            <span className="text-slate-200 w-32 py-2  pl-2 break-words">
+              {product.descripcion}
+            </span>
+            <span className="text-slate-200 w-32 py-2  pl-2 flex items-center justify-center  break-words">
+              <Link to={`/edit/${product.id}`}>
                 <img
-                  src={del}
-                  alt="delete"
-                  className="h-8 w-8 bg-red-600 rounded-sm p-1 cursor-pointer inline-block"
-                  onClick={() => deleteProduct(product.id)}
+                  src={edit}
+                  alt="edit"
+                  className="h-8 w-8 bg-blue-500 rounded-sm p-1 cursor-pointer inline-block mr-1"
                 />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+              </Link>
+              <img
+                src={del}
+                alt="delete"
+                className="h-8 w-8 bg-red-600 rounded-sm p-1 cursor-pointer inline-block"
+                onClick={() => deleteProduct(product.id)}
+              />
+            </span>
+          </div>
+        ))}
+      </article>
     </section>
   );
 };

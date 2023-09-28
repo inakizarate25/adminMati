@@ -6,7 +6,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 const App = () => {
   return (
-    <main className="h-screen w-screen font-mono">
+    <main className="h-screen w-full font-mono">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Auth />} />

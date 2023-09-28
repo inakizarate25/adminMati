@@ -1,0 +1,16 @@
+.categorias {
+    position: relative;
+    display: inline-block;
+}
+
+.catFill {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    right: -120px;
+    top: 0;
+}
+
+.categorias:hover .catFill {
+    display: flex;
+}
