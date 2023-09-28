@@ -19,7 +19,7 @@ const Header = () => {
         console.log(error);
       });
   };
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const Menus = [{ title: "Cerrar Sesion", src: user, gap: true }];
   return (
     <div className="flex fixed -left-20 top-0">
