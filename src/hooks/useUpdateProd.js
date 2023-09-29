@@ -1,23 +1,31 @@
-// import { updateDoc, doc } from "firebase/firestore";
-// import { db } from "../config/firebaseConfig";
+import { useState } from "react";
 
-// export const useUpdateProd = (id) => {
-//   const collectionRef = collection(db, "productos");
-//   const updateProduct = async (
-//     id,
-//     nombre,
-//     precio,
-//     stock,
-//     categoria,
-//     descripcion
-//   ) => {
-//     await updateDoc(doc(collectionRef, id), {
-//       nombre,
-//       precio,
-//       stock,
-//       categoria,
-//       descripcion,
-//     });
-//   };
-//   return { updateProduct };
-// };
+export const useUpdateProd = (initialProducts) => {
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [productNameFilter, setProductNameFilter] = useState("");
+
+  const filterByCategory = (value) => {
+    setSelectedCategory(value);
+    setProductNameFilter("");
+  };
+
+  const filterByName = (value) => {
+    setProductNameFilter(value);
+  };
+
+  const filteredItems = initialProducts.filter((product) => {
+    return (
+      (!selectedCategory || product.categoria === selectedCategory) &&
+      (!productNameFilter ||
+        product.nombre.toLowerCase().includes(productNameFilter.toLowerCase()))
+    );
+  });
+
+  return {
+    selectedCategory,
+    productNameFilter,
+    filterByCategory,
+    filterByName,
+    filteredItems,
+  };
+};

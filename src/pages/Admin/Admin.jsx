@@ -1,36 +1,22 @@
 import { useGetProducts } from "../../hooks/useGetProducts";
 import { useDeleteProduct } from "../../hooks/useDeleteProduct";
+import { useUpdateProd } from "../../hooks/useUpdateProd";
 import Header from "../../components/Header/Header";
 import edit from "../../assets/pen.svg";
 import del from "../../assets/trash-alt (1).svg";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import "./styles.css";
 const Admin = () => {
   const { products, getProducts } = useGetProducts();
   const { deleteProduct } = useDeleteProduct();
 
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [productNameFilter, setProductNameFilter] = useState("");
-
-  const filterByCategory = (e) => {
-    const { value } = e.target;
-    setSelectedCategory(value);
-    setProductNameFilter("");
-  };
-  const filterByName = (event) => {
-    const { value } = event.target;
-    setProductNameFilter(value);
-  };
-  const filteredItems = products.filter((product) => {
-    return (
-      (!selectedCategory || product.categoria === selectedCategory) &&
-      (!productNameFilter ||
-        product.nombre
-          .toLowerCase()
-          .includes(productNameFilter.toLocaleLowerCase()))
-    );
-  });
+  const {
+    selectedCategory,
+    productNameFilter,
+    filterByCategory,
+    filterByName,
+    filteredItems,
+  } = useUpdateProd(products);
 
   return (
     <section className=" bg-neutral-900 flex items-center justify-around flex-col  gap-10  w-full min-h-full overflow-hidden px-3 py-8">

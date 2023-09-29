@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import control from "../../assets/control.png";
 import user from "../../assets/User.png";
-import search from "../../assets/Search.png";
 import chart from "../../assets/Chart.png";
 
 const Header = () => {
@@ -20,13 +19,13 @@ const Header = () => {
       });
   };
   const [open, setOpen] = useState(false);
-  const Menus = [{ title: "Cerrar Sesion", src: user, gap: true }];
+  const Menus = [{ title: "Cerrar Sesion", src: user }];
   return (
-    <div className="flex fixed -left-20 top-0">
+    <div className="flex fixed -left-20 top-0 h-full">
       <div
         className={` ${
           open ? "w-72 bg-neutral-700 left-20" : "w-20 "
-        } bg-neutral-700 h-screen p-5  pt-8 relative duration-300`}
+        } bg-neutral-700 h-full p-5  pt-8 relative duration-300 flex flex-col`}
       >
         <img
           src={control}
@@ -35,12 +34,7 @@ const Header = () => {
           onClick={() => setOpen(!open)}
         />
         <div className="flex gap-x-4 items-center">
-          <img
-            src={chart}
-            className={`cursor-pointer duration-500 ${
-              open && "rotate-[360deg]"
-            }`}
-          />
+          <img src={chart} className="cursor-pointer duration-500" />
 
           <h1
             className={`text-white origin-left font-medium text-xl duration-200 ${
@@ -50,34 +44,20 @@ const Header = () => {
             Admin Repuestos
           </h1>
         </div>
-        <ul className="pt-6">
-          {Menus.map((Menu, index) => (
-            <li
-              key={index}
-              className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
-            ${Menu.gap ? "mt-9" : "mt-2"} ${index === 0 && "bg-light-white"} `}
-              onClick={signOutUser}
-            >
-              <img src={Menu.src} />
-              <span
-                className={`${
-                  !open && "hidden"
-                } origin-left duration-200 bg-slate-800 p-2 rounded-md`}
-              >
-                {Menu.title}
-              </span>
-            </li>
-          ))}
-        </ul>
+        <ul className="pt-6"></ul>
+        <div className="flex items-center gap-3 cursor-pointer mt-auto">
+          <img src={user} alt="" />
+          <button
+            onClick={signOutUser}
+            className={`${
+              !open && "hidden"
+            } origin-left duration-200 bg-slate-800 p-2 rounded-md text-white `}
+          >
+            Cerrar Sesion
+          </button>
+        </div>
       </div>
     </div>
-    // <header className="h-full w-38 bg-slate-500 flex flex-col  items-center justify-around fixed top-0 left-0 px-3">
-    //   <p>X</p>
-    //   <h1>Admin</h1>
-    //   <button onClick={signOutUser} className="bg-red-500 px-5 py-2 text-white">
-    //     Cerrar sesion
-    //   </button>
-    // </header>
   );
 };
 
