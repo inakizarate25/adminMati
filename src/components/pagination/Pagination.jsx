@@ -1,24 +1,25 @@
 import React from "react";
+import arrow from "../../assets/step-forward.svg";
 
-const Pagination = ({ totalProducts, productsPerPage, paginate }) => {
-  const pageNumbers = [];
-
-  for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i++) {
-    pageNumbers.push(i);
-  }
-
+const Pagination = ({ itemsPerPage, currentPage }) => {
   return (
-    <nav>
-      <ul className="pagination">
-        {pageNumbers.map((number) => (
-          <li key={number} className="page-item">
-            <button onClick={() => paginate(number)} className="page-link">
-              {number}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <div>
+      <button
+        className="bg-slate-700 h-10 w-10 rounded-md cursor-pointer transform rotate-180"
+        onClick={() => handlePageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+      >
+        <img src={arrow} alt="prev" />
+      </button>
+      <p>{currentPage}</p>
+      <button
+        className="bg-slate-700 h-10 w-10 rounded-md cursor-pointer"
+        onClick={() => handlePageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+      >
+        <img src={arrow} alt="next" />
+      </button>
+    </div>
   );
 };
 

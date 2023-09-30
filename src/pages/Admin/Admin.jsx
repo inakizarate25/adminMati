@@ -3,6 +3,7 @@ import { useDeleteProduct } from "../../hooks/useDeleteProduct";
 import { useUpdateProd } from "../../hooks/useUpdateProd";
 import edit from "../../assets/pen.svg";
 import del from "../../assets/trash-alt (1).svg";
+import arrow from "../../assets/step-forward.svg";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import "./styles.css";
@@ -18,6 +19,22 @@ const Admin = () => {
     filteredItems,
   } = useUpdateProd(products);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5; // Número de productos por página
+  // Verifica si se están aplicando filtros
+  const isFiltering = selectedCategory || productNameFilter;
+
+  // Si se están aplicando filtros, muestra los elementos filtrados sin paginación
+  // Si no, muestra los elementos paginados
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+  const itemsToDisplay = isFiltering ? filteredItems : currentItems;
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
   return (
     <section className=" bg-neutral-900 flex items-center justify-around flex-col  gap-10  w-full min-h-full overflow-hidden px-3 py-8">
       {/* FILTROS Y AGREGAR PRODUCTO */}
@@ -79,7 +96,7 @@ const Admin = () => {
           </span>
         </header>
 
-        {filteredItems.map((product) => (
+        {itemsToDisplay.map((product) => (
           <div
             key={product.id}
             className="flex items-center justify-between   text-slate-50 border-b border-slate-600 bg-neutral-900 lg:w-full"
@@ -120,6 +137,25 @@ const Admin = () => {
           </div>
         ))}
       </article>
+      {!isFiltering && (
+        <div className="flex items-center justify-center gap-4">
+          <button
+            className=" h-10 w-10 rounded-md cursor-pointer rotate-180"
+            onClick={() => paginate(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            <img src={arrow} alt="prev" />
+          </button>
+          <p className="text-slate-200 text-xl font-semibold">{currentPage}</p>
+          <button
+            className=" h-10 w-10 rounded-md cursor-pointer "
+            onClick={() => paginate(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            <img src={arrow} alt="next" />
+          </button>
+        </div>
+      )}
     </section>
   );
 };
