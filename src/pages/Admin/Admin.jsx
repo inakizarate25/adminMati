@@ -1,13 +1,14 @@
 import { useGetProducts } from "../../hooks/useGetProducts";
 import { useDeleteProduct } from "../../hooks/useDeleteProduct";
 import { useUpdateProd } from "../../hooks/useUpdateProd";
-import Header from "../../components/Header/Header";
+import Pagination from "../../components/pagination/Pagination";
 import edit from "../../assets/pen.svg";
 import del from "../../assets/trash-alt (1).svg";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import "./styles.css";
 const Admin = () => {
-  const { products, getProducts } = useGetProducts();
+  const { products } = useGetProducts();
   const { deleteProduct } = useDeleteProduct();
 
   const {
@@ -20,8 +21,6 @@ const Admin = () => {
 
   return (
     <section className=" bg-neutral-900 flex items-center justify-around flex-col  gap-10  w-full min-h-full overflow-hidden px-3 py-8">
-      <Header />
-
       {/* FILTROS Y AGREGAR PRODUCTO */}
       <nav className="flex flex-col lg:flex-row items-end  justify-around  gap-5 ">
         <div className="flex items-start gap-1 flex-col">

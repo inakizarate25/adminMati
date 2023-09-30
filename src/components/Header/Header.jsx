@@ -1,31 +1,41 @@
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebaseConfig";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import control from "../../assets/control.png";
 import user from "../../assets/User.png";
 import chart from "../../assets/Chart.png";
+import listUl from "../../assets/list-ul.svg";
+import label from "../../assets/label-alt.svg";
+import cliente from "../../assets/user.svg";
 
 const Header = () => {
   const navigate = useNavigate();
+
   const signOutUser = () => {
     signOut(auth)
       .then(() => {
         navigate("/");
         localStorage.removeItem("user");
+        localStorage.removeItem("isAuthenticated");
       })
       .catch((error) => {
         console.log(error);
       });
   };
   const [open, setOpen] = useState(false);
-  const Menus = [{ title: "Cerrar Sesion", src: user }];
   return (
-    <div className="flex fixed -left-20 top-0 h-full">
+    <div
+      className={
+        localStorage.getItem("isAuthenticated")
+          ? "flex fixed -left-20 top-0 h-full"
+          : "hidden"
+      }
+    >
       <div
         className={` ${
           open ? "w-72 bg-neutral-700 left-20" : "w-20 "
-        } bg-neutral-700 h-full p-5  pt-8 relative duration-300 flex flex-col`}
+        } bg-neutral-700 h-full p-5  pt-8 relative duration-300 flex flex-col `}
       >
         <img
           src={control}
@@ -38,13 +48,47 @@ const Header = () => {
 
           <h1
             className={`text-white origin-left font-medium text-xl duration-200 ${
-              !open && "scale-0"
+              !open && "hidden"
             }`}
           >
             Admin Repuestos
           </h1>
         </div>
-        <ul className="pt-6"></ul>
+        <ul className="pt-6 flex flex-col gap-6">
+          <div className="flex items-center gap-3">
+            <img src={listUl} className="h-8 w-8" />
+            <Link
+              to="/admin"
+              className={`${
+                !open && "hidden"
+              } origin-left duration-200 bg-slate-300 px-5 py-2 rounded-md text-slate-950 `}
+            >
+              Productos
+            </Link>
+          </div>
+          <div className="flex items-center gap-3">
+            <img src={label} className="h-8 w-8" />
+            <Link
+              to="/ventas"
+              className={`${
+                !open && "hidden"
+              } origin-left duration-200 bg-slate-300 px-5 py-2 rounded-md text-slate-950 `}
+            >
+              Ventas
+            </Link>
+          </div>
+          <div className="flex items-center gap-3">
+            <img src={cliente} className="h-8 w-8" />
+            <Link
+              to="/clientes"
+              className={`${
+                !open && "hidden"
+              } origin-left duration-200 bg-slate-300 px-5 py-2 rounded-md text-slate-950 `}
+            >
+              Clientes
+            </Link>
+          </div>
+        </ul>
         <div className="flex items-center gap-3 cursor-pointer mt-auto">
           <img src={user} alt="" />
           <button

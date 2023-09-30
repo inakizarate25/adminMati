@@ -1,19 +1,20 @@
 import { useState } from "react";
-
-export const useUpdateProd = (initialProducts) => {
+export const useUpdateProd = (products) => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [productNameFilter, setProductNameFilter] = useState("");
 
-  const filterByCategory = (value) => {
+  const filterByCategory = (e) => {
+    const { value } = e.target;
     setSelectedCategory(value);
     setProductNameFilter("");
   };
 
-  const filterByName = (value) => {
+  const filterByName = (event) => {
+    const { value } = event.target;
     setProductNameFilter(value);
   };
 
-  const filteredItems = initialProducts.filter((product) => {
+  const filteredItems = products.filter((product) => {
     return (
       (!selectedCategory || product.categoria === selectedCategory) &&
       (!productNameFilter ||

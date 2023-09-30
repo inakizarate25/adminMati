@@ -1,33 +1,19 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../config/firebaseConfig";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useGetUserInfo";
 const Auth = () => {
-  const navigate = useNavigate();
+  const { signIn, error } = useAuth();
 
-  const signIn = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user);
-        localStorage.setItem("user", JSON.stringify(user));
-        navigate("/admin");
-      })
-      // poner toast
-      .catch((error) => {
-        alert("usuario o contraseña incorrectos");
-      });
+    signIn(email, password);
   };
 
   return (
     <section className="h-full w-full bg-slate-500 flex items-center justify-center">
       <form
         className="flex flex-col gap-5 items-center justify-center w-[300px] h-80 shadow-2xl rounded-md p-5"
-        onSubmit={signIn}
+        onSubmit={handleSubmit}
       >
         <h2 className="text-3xl">Inicia Sesion</h2>
 
