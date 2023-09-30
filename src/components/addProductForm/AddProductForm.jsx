@@ -9,6 +9,7 @@ const AddProductForm = () => {
   const [stock, setStock] = useState("");
   const [categoria, setCategoria] = useState("");
   const [descripcion, setDescripcion] = useState("");
+  const [id, setId] = useState("");
 
   const navigate = useNavigate();
 
@@ -26,6 +27,7 @@ const AddProductForm = () => {
     setStock("");
     setCategoria("");
     setDescripcion("");
+    setId("");
     navigate("/admin");
   };
   return (

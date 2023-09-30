@@ -1,7 +1,6 @@
 import { useGetProducts } from "../../hooks/useGetProducts";
 import { useDeleteProduct } from "../../hooks/useDeleteProduct";
 import { useUpdateProd } from "../../hooks/useUpdateProd";
-import Pagination from "../../components/pagination/Pagination";
 import edit from "../../assets/pen.svg";
 import del from "../../assets/trash-alt (1).svg";
 import { Link } from "react-router-dom";
