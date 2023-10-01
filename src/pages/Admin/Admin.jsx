@@ -73,7 +73,7 @@ const Admin = () => {
         </div>
         <Link
           to={"/add"}
-          className="flex items-centerjustify-center gap-3 bg-gray-800 text-slate-50 rounded-md px-3 py-2 "
+          className="flex items-center justify-center gap-3 bg-gray-800 text-slate-50 rounded-md  py-2 w-[300px]"
         >
           Agregar Nuevo Producto
         </Link>
@@ -81,17 +81,17 @@ const Admin = () => {
       {/* TABLA DE PRODUCTOS */}
       <article className="w-full max-w-screen-xl flex items-start justify-between flex-col border border-slate-900 rounded-xl mb-10  overflow-x-scroll mx-5 lg:overflow-x-hidden min-h-full">
         <header className="flex items-center justify-between  bg-slate-900 rounded-t-lg text-slate-50 lg:w-full">
-          <span className="text-slate-150 pl-2 text-xl w-32 py-2 ">Id</span>
-          <span className="text-slate-150 pl-2 text-xl w-32 py-2 ">Nombre</span>
-          <span className="text-slate-150 pl-2 text-xl w-32 py-2 ">Precio</span>
-          <span className="text-slate-150 pl-2 text-xl w-32 py-2 ">Stock</span>
-          <span className="text-slate-150 pl-2 text-xl w-32 py-2 ">
+          <span className="text-slate-150 pl-2 text-xl w-40 py-2 ">Id</span>
+          <span className="text-slate-150 pl-2 text-xl w-40 py-2 ">Nombre</span>
+          <span className="text-slate-150 pl-2 text-xl w-40 py-2 ">Precio</span>
+          <span className="text-slate-150 pl-2 text-xl w-40 py-2 ">Stock</span>
+          <span className="text-slate-150 pl-2 text-xl w-40 py-2 ">
             Categoria
           </span>
-          <span className="text-slate-150 pl-2 text-xl w-32 py-2 ">
+          <span className="text-slate-150 pl-2 text-xl w-40 py-2 ">
             Descripcion
           </span>
-          <span className="text-slate-150 pl-2 text-xl w-32 py-2 ">
+          <span className="text-slate-150 pl-2 text-xl w-40 py-2 ">
             Acciones
           </span>
         </header>
@@ -101,25 +101,31 @@ const Admin = () => {
             key={product.id}
             className="flex items-center justify-between   text-slate-50 border-b border-slate-600 bg-neutral-900 lg:w-full"
           >
-            <span className="text-slate-200 w-32 py-2  pl-2 break-words">
+            <span className="text-slate-200 w-40 py-2  pl-2 break-words">
               {product.id}
             </span>
-            <span className="text-slate-200 w-32 py-2  pl-2 break-words">
+            <span className="text-slate-200 w-40 py-2  pl-2 break-words">
               {product.name}
             </span>
-            <span className="text-slate-200 w-32 py-2  pl-2 break-words">
+            <span className="text-slate-200 w-40 py-2  pl-2 break-words">
               ${product.price}
             </span>
-            <span className="text-slate-200 w-32 py-2  pl-2 break-words">
-              {product.stock} Unidades
+            <span
+              className={
+                product.stock === 0
+                  ? "text-red-500 w-40 py-2  pl-2 break-words"
+                  : "text-slate-200 w-40 py-2  pl-2 break-words"
+              }
+            >
+              {product.stock === 0 ? "Sin Stock" : `${product.stock} Unidades`}
             </span>
-            <span className="text-slate-200 w-32 py-2  pl-2 break-words">
+            <span className="text-slate-200 w-40 py-2  pl-2 break-words">
               {product.category}
             </span>
-            <span className="text-slate-200 w-32 py-2  pl-2 break-words">
+            <span className="text-slate-200 w-40 py-2  pl-2 break-words">
               {product.description}
             </span>
-            <span className="text-slate-200 w-32 py-2  pl-2 flex items-center justify-center  break-words">
+            <span className="text-slate-200 w-40 py-2  pl-2 flex items-center justify-center  break-words">
               <Link to={`/edit/${product.id}`}>
                 <img
                   src={edit}

@@ -28,7 +28,7 @@ const Header = () => {
     <div
       className={
         localStorage.getItem("isAuthenticated")
-          ? "flex fixed -left-20 top-0 h-full"
+          ? "flex fixed -left-20 top-0 h-full z-50"
           : "hidden"
       }
     >
@@ -51,7 +51,7 @@ const Header = () => {
               !open && "hidden"
             }`}
           >
-            Admin Repuestos
+            Administrador
           </h1>
         </div>
         <ul className="pt-6 flex flex-col gap-6">
