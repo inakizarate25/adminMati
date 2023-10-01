@@ -16,9 +16,9 @@ export const useUpdateProd = (products) => {
 
   const filteredItems = products.filter((product) => {
     return (
-      (!selectedCategory || product.categoria === selectedCategory) &&
+      (!selectedCategory || product.category === selectedCategory) &&
       (!productNameFilter ||
-        product.nombre.toLowerCase().includes(productNameFilter.toLowerCase()))
+        product.name.toLowerCase().includes(productNameFilter.toLowerCase()))
     );
   });
 

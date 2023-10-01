@@ -5,11 +5,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getDoc, updateDoc } from "firebase/firestore";
 
 const EditFrom = () => {
-  const [nombre, setNombre] = useState("");
-  const [precio, setPrecio] = useState(0);
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState(0);
   const [stock, setStock] = useState(0);
-  const [categoria, setCategoria] = useState("");
-  const [descripcion, setDescripcion] = useState("");
+  const [category, setCategory] = useState("");
+  const [description, setDescription] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -17,11 +17,11 @@ const EditFrom = () => {
     e.preventDefault();
     const product = doc(db, "productos", id);
     const data = {
-      nombre: nombre,
-      precio: precio,
+      name: name,
+      price: price,
       stock: stock,
-      categoria: categoria,
-      descripcion: descripcion,
+      category: category,
+      description: description,
     };
     await updateDoc(product, data);
     navigate("/admin");
@@ -30,11 +30,11 @@ const EditFrom = () => {
     const product = await getDoc(doc(db, "productos", id));
     if (product.exists()) {
       //console.log(product.data())
-      setDescripcion(product.data().descripcion);
-      setNombre(product.data().nombre);
-      setPrecio(product.data().precio);
+      setDescription(product.data().description);
+      setName(product.data().name);
+      setPrice(product.data().price);
       setStock(product.data().stock);
-      setCategoria(product.data().categoria);
+      setCategory(product.data().category);
     } else {
       console.log("El producto no existe");
     }
@@ -51,15 +51,15 @@ const EditFrom = () => {
       >
         <input
           type="text"
-          value={nombre}
-          onChange={(e) => setNombre(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           placeholder="Nombre"
           className="border border-slate-900 rounded-md px-3 py-2 w-[300px]"
         />
         <input
           type="number"
-          value={precio}
-          onChange={(e) => setPrecio(e.target.value)}
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
           placeholder="Precio"
           className="border border-slate-900 rounded-md px-3 py-2 w-[300px]"
         />
@@ -71,19 +71,19 @@ const EditFrom = () => {
           className="border border-slate-900 rounded-md px-3 py-2 w-[300px]"
         />
         <select
-          value={categoria}
-          onChange={(e) => setCategoria(e.target.value)}
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
           className="border border-slate-900 rounded-md px-3 py-2 w-[300px]"
         >
           <option value="">Categoria</option>
-          <option value="categoria 1">Categoría 1</option>
-          <option value="categoria 2">Categoría 2</option>
-          <option value="categoria 3">Categoría 3</option>
+          <option value="celulares">celulares</option>
+          <option value="accesorios">accesorios</option>
+          <option value="consolas">consolas</option>
         </select>
         <input
           type="text"
-          value={descripcion}
-          onChange={(e) => setDescripcion(e.target.value)}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
           placeholder="Descripcion"
           className="border border-slate-900 rounded-md px-3 py-2 w-[300px]"
         />

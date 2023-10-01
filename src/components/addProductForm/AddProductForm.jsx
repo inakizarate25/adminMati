@@ -4,30 +4,28 @@ import { useNavigate } from "react-router-dom";
 
 const AddProductForm = () => {
   const { addProduct } = useAddProduct();
-  const [nombre, setNombre] = useState("");
-  const [precio, setPrecio] = useState("");
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
-  const [categoria, setCategoria] = useState("");
-  const [descripcion, setDescripcion] = useState("");
-  const [id, setId] = useState("");
+  const [category, setCategory] = useState("");
+  const [description, setDescription] = useState("");
 
   const navigate = useNavigate();
 
   const onSubmit = (e) => {
     e.preventDefault();
     addProduct({
-      nombre,
-      precio,
+      name,
+      price,
       stock,
-      categoria,
-      descripcion,
+      category,
+      description,
     });
-    setNombre("");
-    setPrecio("");
+    setName("");
+    setPrice("");
     setStock("");
-    setCategoria("");
-    setDescripcion("");
-    setId("");
+    setCategory("");
+    setDescription("");
     navigate("/admin");
   };
   return (
@@ -40,15 +38,15 @@ const AddProductForm = () => {
         <input
           type="text"
           placeholder="Nombre"
-          value={nombre}
-          onChange={(e) => setNombre(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           className="border border-slate-900 rounded-md px-3 py-2 w-[300px]"
         />
         <input
           type="number"
           placeholder="Precio"
-          value={precio}
-          onChange={(e) => setPrecio(e.target.value)}
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
           className="border border-slate-900 rounded-md px-3 py-2 w-[300px]"
         />
         <input
@@ -59,19 +57,19 @@ const AddProductForm = () => {
           className="border border-slate-900 rounded-md px-3 py-2 w-[300px]"
         />
         <select
-          value={categoria}
-          onChange={(e) => setCategoria(e.target.value)}
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
           className="border border-slate-900 rounded-md px-3 py-2 w-[300px]"
         >
-          <option value="categoria 1">Categoría 1</option>
-          <option value="categoria 2">Categoría 2</option>
-          <option value="categoria 3">Categoría 3</option>
+          <option value="categoria 1">celulares</option>
+          <option value="categoria 2">accesorios</option>
+          <option value="categoria 3">consolas</option>
         </select>
         <input
           type="text"
           placeholder="Descripcion"
-          value={descripcion}
-          onChange={(e) => setDescripcion(e.target.value)}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
           className="border border-slate-900 rounded-md px-3 py-2 w-[300px]"
         />
         <button

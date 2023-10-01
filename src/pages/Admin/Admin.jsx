@@ -66,9 +66,9 @@ const Admin = () => {
             className="border border-slate-900 rounded-md px-3 py-2 w-[300px]"
           >
             <option value="">Todos</option>
-            <option value="categoria 1">Categoría 1</option>
-            <option value="categoria 2">Categoría 2</option>
-            <option value="categoria 3">Categoría 3</option>
+            <option value="celulares">celulares</option>
+            <option value="accesorios">accesorios</option>
+            <option value="consolas">consolas</option>
           </select>
         </div>
         <Link
@@ -105,19 +105,19 @@ const Admin = () => {
               {product.id}
             </span>
             <span className="text-slate-200 w-32 py-2  pl-2 break-words">
-              {product.nombre}
+              {product.name}
             </span>
             <span className="text-slate-200 w-32 py-2  pl-2 break-words">
-              ${product.precio}
+              ${product.price}
             </span>
             <span className="text-slate-200 w-32 py-2  pl-2 break-words">
               {product.stock} Unidades
             </span>
             <span className="text-slate-200 w-32 py-2  pl-2 break-words">
-              {product.categoria}
+              {product.category}
             </span>
             <span className="text-slate-200 w-32 py-2  pl-2 break-words">
-              {product.descripcion}
+              {product.description}
             </span>
             <span className="text-slate-200 w-32 py-2  pl-2 flex items-center justify-center  break-words">
               <Link to={`/edit/${product.id}`}>

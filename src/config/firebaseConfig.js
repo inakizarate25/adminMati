@@ -7,6 +7,7 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
+  // matiPruebas
   apiKey: "AIzaSyA4wTT7DWfpll1FeD2pq0ISUbIqsrRkOOw",
   authDomain: "matipruebas.firebaseapp.com",
   projectId: "matipruebas",
@@ -20,6 +21,15 @@ const firebaseConfig = {
   // storageBucket: "matiadmin-ac197.appspot.com",
   // messagingSenderId: "25575565813",
   // appId: "1:25575565813:web:13ac80ddd42ba8207698bc",
+
+  // phoneland
+  apiKey: "AIzaSyAZ1pAE-kkCvClBbxmV-srMpdWNvCZKqEU",
+  authDomain: "react-coderhouse-7a36d.firebaseapp.com",
+  projectId: "react-coderhouse-7a36d",
+  storageBucket: "react-coderhouse-7a36d.appspot.com",
+  messagingSenderId: "397209501781",
+  appId: "1:397209501781:web:6735386b27ae75d13ed4dc",
+  measurementId: "G-PZGQSWRF1T",
 };
 
 // Initialize Firebase

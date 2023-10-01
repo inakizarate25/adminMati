@@ -4,19 +4,13 @@ import { db } from "../config/firebaseConfig";
 export const useAddProduct = () => {
   const collectionRef = collection(db, "productos");
 
-  const addProduct = async ({
-    nombre,
-    precio,
-    stock,
-    categoria,
-    descripcion,
-  }) => {
+  const addProduct = async ({ name, price, stock, category, description }) => {
     await addDoc(collectionRef, {
-      nombre,
-      precio,
+      name,
+      price,
       stock,
-      categoria,
-      descripcion,
+      category,
+      description,
     });
   };
   return { addProduct };
