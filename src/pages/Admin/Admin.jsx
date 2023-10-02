@@ -37,6 +37,8 @@ const Admin = () => {
   };
   return (
     <section className=" bg-neutral-900 flex items-center justify-around flex-col  gap-10  w-full min-h-full overflow-hidden px-3 py-8">
+      <h2 className="text-4xl text-white font-medium  px-5">Administrador</h2>
+
       {/* FILTROS Y AGREGAR PRODUCTO */}
       <nav className="flex flex-col lg:flex-row items-end  justify-around  gap-5 ">
         <div className="flex items-start gap-1 flex-col">
@@ -78,8 +80,11 @@ const Admin = () => {
           Agregar Nuevo Producto
         </Link>
       </nav>
+      <h3 className="text-2xl text-white font-medium self-start px-5">
+        Productos
+      </h3>
       {/* TABLA DE PRODUCTOS */}
-      <article className="w-full max-w-screen-xl flex items-start justify-between flex-col border border-slate-900 rounded-xl mb-10  overflow-x-scroll mx-5 lg:overflow-x-hidden min-h-full">
+      <article className="w-full max-w-screen-xl flex items-start justify-between flex-col border border-slate-900 rounded-xl mb-10  overflow-x-scroll mx-5 lg:overflow-x-hidden ">
         <header className="flex items-center justify-between  bg-slate-900 rounded-t-lg text-slate-50 lg:w-full">
           <span className="text-slate-150 pl-2 text-xl w-40 py-2 ">Id</span>
           <span className="text-slate-150 pl-2 text-xl w-40 py-2 ">Nombre</span>

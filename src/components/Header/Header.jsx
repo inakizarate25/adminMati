@@ -47,7 +47,7 @@ const Header = () => {
           <img src={chart} className="cursor-pointer duration-500" />
 
           <h1
-            className={`text-white origin-left font-medium text-xl duration-200 ${
+            className={`text-white origin-left font-medium text-xl duration-100 ${
               !open && "hidden"
             }`}
           >
@@ -55,35 +55,47 @@ const Header = () => {
           </h1>
         </div>
         <ul className="pt-6 flex flex-col gap-6">
-          <div className="flex items-center gap-3">
+          <div
+            className={`${
+              !open && "hidden"
+            } flex items-center gap-3 bg-slate-900 rounded-md px-2 w-52 origin-left duration-200`}
+          >
             <img src={listUl} className="h-8 w-8" />
             <Link
               to="/admin"
               className={`${
                 !open && "hidden"
-              } origin-left duration-200 bg-slate-300 px-5 py-2 rounded-md text-slate-950 `}
+              } origin-left duration-200  px-5 py-2 rounded-md text-slate-200 font-semibold text-lg `}
             >
               Productos
             </Link>
           </div>
-          <div className="flex items-center gap-3">
+          <div
+            className={`${
+              !open && "hidden"
+            } flex items-center gap-3 bg-slate-900 rounded-md px-2 w-52 origin-left duration-200`}
+          >
             <img src={label} className="h-8 w-8" />
             <Link
-              to="/ventas"
+              to="/ordenes"
               className={`${
                 !open && "hidden"
-              } origin-left duration-200 bg-slate-300 px-5 py-2 rounded-md text-slate-950 `}
+              } origin-left duration-200  px-5 py-2 rounded-md text-slate-200 font-semibold text-lg `}
             >
               Ventas
             </Link>
           </div>
-          <div className="flex items-center gap-3">
+          <div
+            className={`${
+              !open && "hidden"
+            } flex items-center gap-3 bg-slate-900 rounded-md px-2 w-52 origin-left duration-200`}
+          >
             <img src={cliente} className="h-8 w-8" />
             <Link
               to="/clientes"
               className={`${
                 !open && "hidden"
-              } origin-left duration-200 bg-slate-300 px-5 py-2 rounded-md text-slate-950 `}
+              } origin-left duration-200  px-5 py-2 rounded-md text-slate-200 font-semibold text-lg `}
             >
               Clientes
             </Link>

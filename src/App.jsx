@@ -1,6 +1,7 @@
 import Auth from "./pages/Auth/Auth";
 import Admin from "./pages/Admin/Admin";
 import Clientes from "./pages/Clientes/Clientes";
+import Ordenes from "./pages/ordenes/Ordenes";
 import Header from "./components/Header/Header";
 import EditForm from "./components/EditForm/EditFrom";
 import AddProductForm from "./components/addProductForm/AddProductForm";
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="/add" element={<AddProductForm />} />
           <Route path="/edit/:id" element={<EditForm />} />
           <Route path="/clientes" element={<Clientes />} />
+          <Route path="/ordenes" element={<Ordenes />} />
         </Routes>
       </BrowserRouter>
     </main>

@@ -28,8 +28,8 @@ const firebaseConfig = {
   projectId: "react-coderhouse-7a36d",
   storageBucket: "react-coderhouse-7a36d.appspot.com",
   messagingSenderId: "397209501781",
-  appId: "1:397209501781:web:6735386b27ae75d13ed4dc",
-  measurementId: "G-PZGQSWRF1T",
+  appId: "1:397209501781:web:825104b4ddfbd65b3ed4dc",
+  measurementId: "G-43PM918FSY",
 };
 
 // Initialize Firebase
